@@ -1,8 +1,11 @@
 const fetch = require('node-fetch');
+// get the current date
  let date = new Date();
+// olddate get the date month ago ( 30 day to be exact )
  let olddate = new Date(date.setMonth(date.getMonth()-1)).toISOString().slice(0, 10);
 
- console.log(olddate);
+ // console.log(olddate); is for the test 
+// now i fetch data from github api and i stor every language in a array of uniqes languages
   fetch(`https://api.github.com/search/repositories?q=created:>${olddate}&sort=stars&order=desc`)
 .then((res)=> res.json())
   .then((res)=>{
@@ -13,7 +16,7 @@ const fetch = require('node-fetch');
           arrayOfLanguages[arrayOfLanguages.length] = res.items[i].language;
         }
       }
-      var cmp=0;
+      var cmp=0;// is a compter
       // console.log(arrayOfLanguages);
       for (let i = 0; i < arrayOfLanguages.length; i++) {
         if (arrayOfLanguages[i]==null) {
